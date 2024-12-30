@@ -1,6 +1,6 @@
 package com.squidco.demo.service;
 
-import org.springframework.beans.factory.annotation.Autowired;
+// import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
 import com.squidco.demo.entity.User;
@@ -9,7 +9,6 @@ import com.squidco.demo.repository.UserRepo;
 
 import java.util.List;
 import java.util.Optional;
-import java.security.SecureRandom;
 
 @Service
 public class UserServiceImple implements UserService {
@@ -49,6 +48,16 @@ public class UserServiceImple implements UserService {
         } else {
             return null;
         }
+    }
+
+    @Override
+    public void deleteById(long id) {
+        userRepo.deleteById(id);
+    }
+
+    @Override
+    public User updateById(User userData) {
+        return userRepo.save(userData);
     }
 
 }

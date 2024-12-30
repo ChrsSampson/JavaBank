@@ -10,4 +10,9 @@ public interface UserService {
     User save(User userData);
 
     User findById(long id);
+
+    void deleteById(long id);
+
+    User updateById(User userData);
+
 }
