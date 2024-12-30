@@ -3,9 +3,9 @@ DROP TABLE IF EXISTS transactions;
 DROP TABLE IF EXISTS accounts;
 DROP TABLE IF EXISTS users;
 
--- Account Roles
-DROP TYPE IF EXISTS user_role;
-CREATE TYPE user_role as ENUM ('user', 'staff', 'admin');
+-- Account Roles - nightmare with JPA - just use Varchar 
+-- DROP TYPE IF EXISTS user_role;
+-- CREATE TYPE user_role as ENUM ('user', 'staff', 'admin');
 
 -- Create the users table
 CREATE TABLE IF NOT EXISTS users  (
@@ -14,7 +14,7 @@ CREATE TABLE IF NOT EXISTS users  (
     last_name VARCHAR(100) NOT NULL,  -- Last name of the user
     email VARCHAR(255) UNIQUE NOT NULL,  -- Email address of the user
 	password varchar(255) NOT NULL,
-    role user_role NOT NULL DEFAULT 'user',
+    role varchar(8) NOT NULL DEFAULT 'user',
     date_of_birth DATE,  -- Date of birth of the user
     created_at TIMESTAMP DEFAULT CURRENT_TIMESTAMP,  -- Timestamp when the user was created
     updated_at TIMESTAMP DEFAULT CURRENT_TIMESTAMP  -- Timestamp for the last update
