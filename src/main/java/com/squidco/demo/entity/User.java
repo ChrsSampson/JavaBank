@@ -11,8 +11,6 @@ import jakarta.persistence.Table;
 import java.util.Date;
 // import java.sql.Timestamp;
 
-import org.hibernate.annotations.Type;
-
 // Data Model for User 
 @Entity
 @Table(name="users")
