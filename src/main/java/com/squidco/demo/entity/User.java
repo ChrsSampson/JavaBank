@@ -1,5 +1,6 @@
 package com.squidco.demo.entity;
 
+import jakarta.persistence.CascadeType;
 import jakarta.persistence.Column;
 import jakarta.persistence.Entity;
 import jakarta.persistence.EnumType;
@@ -7,6 +8,8 @@ import jakarta.persistence.Enumerated;
 import jakarta.persistence.GeneratedValue;
 import jakarta.persistence.GenerationType;
 import jakarta.persistence.Id;
+import jakarta.persistence.OneToMany;
+import jakarta.persistence.PrimaryKeyJoinColumn;
 import jakarta.persistence.Table;
 import java.util.Date;
 // import java.sql.Timestamp;
@@ -46,6 +49,10 @@ public class User {
 
     @Column(name="date_of_birth")
     private Date birthday;
+
+	@OneToMany(mappedBy = "account", cascade = CascadeType.ALL)
+	@PrimaryKeyJoinColumn
+	private Account account;
 
     //   @Column("created_at")
     // private Timestamp created;
