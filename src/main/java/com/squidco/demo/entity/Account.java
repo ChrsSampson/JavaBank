@@ -1,5 +1,6 @@
 package com.squidco.demo.entity;
 
+import jakarta.persistence.CascadeType;
 import jakarta.persistence.Column;
 import jakarta.persistence.Entity;
 import jakarta.persistence.EnumType;
@@ -8,8 +9,6 @@ import jakarta.persistence.GeneratedValue;
 import jakarta.persistence.GenerationType;
 import jakarta.persistence.Id;
 import jakarta.persistence.JoinColumn;
-import jakarta.persistence.MapsId;
-import jakarta.persistence.OneToMany;
 import jakarta.persistence.OneToOne;
 import jakarta.persistence.Table;
 
@@ -22,13 +21,28 @@ public class Account {
         saving;
     }
 
+    // default constructor
+    public Account() {}
+
+
+    public Account(User user, AccountType accountType, double balance) {
+        this.user = user;
+        this.accountType = accountType;
+        this.balance = balance;
+    }
+
+
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
-    @Column(name="account_id")
+    @Column(name="id")
     private long id;
 
-    @Column(name="user_id")
-    private long userId;
+    @OneToOne(cascade=CascadeType.DETACH)
+    @JoinColumn(name="user_id", referencedColumnName = "id")
+    private User user;
+
+    // @Column(name="user_id")
+    // private long userId;
 
     @Column(name="account_type")
     @Enumerated(EnumType.STRING)
@@ -37,10 +51,6 @@ public class Account {
     @Column(name="balance")
     private double balance;
 
-    @OneToOne
-    @MapsId
-    @JoinColumn(name="user_id")
-    private User user;
 
     public long getId() {
         return id;
@@ -48,14 +58,6 @@ public class Account {
 
     public void setId(long id) {
         this.id = id;
-    }
-
-    public long getUserId() {
-        return userId;
-    }
-
-    public void setUserId(long userId) {
-        this.userId = userId;
     }
 
     public AccountType getAccountType() {
@@ -75,16 +77,16 @@ public class Account {
     }
 
     public User getUser() {
-        return user;
+       return user;
     }
 
     public void setUser(User user) {
         this.user = user;
-    }
+    } 
 
     @Override
     public String toString() {
-        return "Accounts [id=" + id + ", userId=" + userId + ", accountType=" + accountType + ", balance=" + balance
+        return "Accounts [id=" + id + ", userId=" + user.getId() + ", accountType=" + accountType + ", balance=" + balance
                 + ", user=" + user + "]";
     }
 

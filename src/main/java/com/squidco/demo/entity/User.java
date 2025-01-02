@@ -1,6 +1,6 @@
 package com.squidco.demo.entity;
 
-import jakarta.persistence.CascadeType;
+
 import jakarta.persistence.Column;
 import jakarta.persistence.Entity;
 import jakarta.persistence.EnumType;
@@ -9,7 +9,6 @@ import jakarta.persistence.GeneratedValue;
 import jakarta.persistence.GenerationType;
 import jakarta.persistence.Id;
 import jakarta.persistence.OneToMany;
-import jakarta.persistence.PrimaryKeyJoinColumn;
 import jakarta.persistence.Table;
 import java.util.Date;
 // import java.sql.Timestamp;
@@ -25,10 +24,22 @@ public class User {
 		admin;
     }
 
+	public User() {}
 
-    @Id
+	
+
+    public User(String firstName, String lastName, String password, String email, UserRole role, Date birthday) {
+		this.firstName = firstName;
+		this.lastName = lastName;
+		this.password = password;
+		this.email = email;
+		this.role = role;
+		this.birthday = birthday;
+	}
+
+	@Id
 	@GeneratedValue(strategy = GenerationType.IDENTITY)
-    @Column(name="user_id")
+    @Column(name="id")
     private Long id;
 
     @Column(name="first_name")
@@ -50,9 +61,8 @@ public class User {
     @Column(name="date_of_birth")
     private Date birthday;
 
-	@OneToMany(mappedBy = "account", cascade = CascadeType.ALL)
-	@PrimaryKeyJoinColumn
-	private Account account;
+	// @OneToMany(mappedBy = "account")
+	// private Account account;
 
     //   @Column("created_at")
     // private Timestamp created;

@@ -1,0 +1,5 @@
+<!-- Clears spring warning about not setting dialect -->
+<hibernate-configuration>
+    <property name="hibernate.dialect">org.hibernate.dialect.PostgreSQLDialect</property>
+    <property name="hibernate.connection.driver_class">org.postgresql.Driver</property>
+</hibernate-configuration>
